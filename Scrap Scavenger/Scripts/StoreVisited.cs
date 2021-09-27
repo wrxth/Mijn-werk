@@ -9,7 +9,9 @@ public class StoreVisited : MonoBehaviour
     public bool Visited;
     public GameObject LocationPoint;
     public GameObject Camera;
-    public LayerMask astoridmask;
+    public LayerMask Asteroidmask;
+    
+    private int Detectrange = 100;
 	
     private void OnEnable()
     {
@@ -19,16 +21,11 @@ public class StoreVisited : MonoBehaviour
 
     private void Update()
     {
-        var ast = Physics.OverlapSphere(transform.position, 100, astoridmask);
+        var ast = Physics.OverlapSphere(transform.position, Detectrange, Asteroidmask);
         for (int i = 0; i < ast.Length; i++)
         {
             if(ast[i] != null)
                 ast[i].GetComponent<Asteroid>().Push(transform.position);
         }
     }
-
-    /*private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position,100);
-    }*/
 }

@@ -8,6 +8,8 @@ public class WaveManager : MonoBehaviour
 
 
     public float Amplitude, Length, Speed, Offset;
+    
+    // singleton
     private void Awake()
     {
         if (instance == null)
@@ -23,9 +25,11 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        // verander de wave height
         Offset += Time.deltaTime * Speed;
     }
-
+    
+    // Return de wave height
     public float GetWaveHeight(float _x)
     {
         return Amplitude * Mathf.Sin(_x/Length + Offset);

@@ -365,24 +365,22 @@ public class LogicManager : MonoBehaviour, ILogicManager {
         {
             for (int x = 0; x < pieceSize.y; x++)
             {
-				if (piece_[pieceRot_, y, x] > 0)
-				{
-					if (pos_.x + x < 0)
-					{
-						//Debug.Log("left");
-						return true;
-					}
-					else if (pos_.x + x > gridSize.x - 1)
-					{
-						//Debug.Log("right");
-						return true;
-					}
-					else if (pos_.y + pieceSize.y - y < 0)
-					{
-						//Debug.Log("down");
-
-						return true;
-					}
+		if (piece_[pieceRot_, y, x] > 0)
+		{
+			// Check if Left was is being hit
+			if (pos_.x + x < 0)
+			{
+				return true;
+			}
+			else if (pos_.x + x > gridSize.x - 1) // Check if right was being hit
+			{
+				return true;
+			}
+			else if (pos_.y + pieceSize.y - y < 0) // Check if bottom was being hit
+			{
+				return true;
+			}
+			// Check if other piece is being hit
                     if (FixedPieces[pos_.y + ActivePiece.GetLength(1) - y , pos_.x + x] > 0)
                     {
 						return true;

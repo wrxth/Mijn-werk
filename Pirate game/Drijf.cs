@@ -14,11 +14,15 @@ public class Drijf : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Duw boot omlaag
         rb.AddForceAtPosition(Physics.gravity / FloaterCount, transform.position, ForceMode.Acceleration);
+        
+        // beweeg de boot correct omhoog
         float waveHeight = WaveManager.instance.GetWaveHeight(transform.position.x);
         if (gameObject.transform.position.y < waveHeight)
         {
             float displacementMulti = Mathf.Clamp01((waveHeight - gameObject.transform.position.y) / DepthBeforeSubMerged) * DisplacementAmount;
+            
             rb.AddForceAtPosition(new Vector3(0f, Mathf.Abs(Physics.gravity.y) * displacementMulti),transform.position ,0f);
             rb.AddForce(displacementMulti * -rb.velocity * WaterDrag * Time.fixedDeltaTime, ForceMode.VelocityChange);
             rb.AddTorque(displacementMulti * -rb.angularVelocity * WaterAnglularDrag * Time.fixedDeltaTime, ForceMode.VelocityChange);

@@ -357,9 +357,9 @@ public class LogicManager : MonoBehaviour, ILogicManager {
 		return new Vector2Int(piece.GetLength(2), piece.GetLength(1));
 	}
 	// de collision 'physics' voor de pieces 
-	private bool HasOverlap(int[,,] piece_, int pieceRot_, Vector2Int pos_)
+    private bool HasOverlap(int[,,] piece_, int pieceRot_, Vector2Int pos_)
     {
-		Vector2Int pieceSize = GetPieceSize(piece_);
+	Vector2Int pieceSize = GetPieceSize(piece_);
 
         for (int y = 0; y < pieceSize.x; y++)
         {
@@ -367,26 +367,26 @@ public class LogicManager : MonoBehaviour, ILogicManager {
             {
 		if (piece_[pieceRot_, y, x] > 0)
 		{
-			// Check if Left was is being hit
-			if (pos_.x + x < 0)
-			{
-				return true;
-			}
-			else if (pos_.x + x > gridSize.x - 1) // Check if right was being hit
-			{
-				return true;
-			}
-			else if (pos_.y + pieceSize.y - y < 0) // Check if bottom was being hit
-			{
-				return true;
-			}
-			// Check if other piece is being hit
+	            // Check if Left was is being hit
+		    if (pos_.x + x < 0)
+		    {
+			return true;
+		    }
+		    else if (pos_.x + x > gridSize.x - 1) // Check if right was being hit
+		    {
+			return true;
+		    }
+		    else if (pos_.y + pieceSize.y - y < 0) // Check if bottom was being hit
+		    {
+			return true;
+		    }
+		    // Check if other piece is being hit
                     if (FixedPieces[pos_.y + ActivePiece.GetLength(1) - y , pos_.x + x] > 0)
                     {
-						return true;
+			return true;
                     }
                 }
-			}
+	    }
         }
 		return false;
     }

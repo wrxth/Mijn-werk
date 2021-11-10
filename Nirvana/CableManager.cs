@@ -63,29 +63,33 @@ public class CableManager : MonoBehaviour
     
     private bool CheckStatus()
     {
+        // Amount correctly connected pins
         int succesAmount = 0;
+        
+        // Check the pins
         for (int i = 0; i < Cables.Length; i++)
         {
             Cable c = Cables[i].GetComponent<Cable>();
             if (c != null)
             {
+                // Pin not connected
                 if (c.CS == Cable.CableState.CONNECTING || c.CS == Cable.CableState.NOT_CONNECTED)
                 {
-                    //Debug.Log("Coneccting/ not connect");
                     return false;
                 }
-                else if (c.CS == Cable.CableState.WRONG_SEQUENCE)
+                else if (c.CS == Cable.CableState.WRONG_SEQUENCE)    // Pin connected to the Wrong Port
                 {
                     Debug.Log("fail");
-                    // return false;
                 }
-                else if (c.CS == Cable.CableState.CONNECTED)
+                else if (c.CS == Cable.CableState.CONNECTED)         // Pinn connected to the correct port
                 {
                     Debug.Log("Succeed");
                     succesAmount++;
                 }
             }
         }
+        
+        // Fail detected
         if (succesAmount != Cables.Length)
         {
             
@@ -94,6 +98,8 @@ public class CableManager : MonoBehaviour
             succesAmount = 0;
             return false;
         }
+        
+        // All pins passed the checks
         return true;
     }
 
